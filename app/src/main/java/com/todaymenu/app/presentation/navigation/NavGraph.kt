@@ -45,7 +45,7 @@ fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
 
         composable(Screen.Fridge.route) {
             FridgeScreen(
-                onNavigateToScan = { navController.navigate(Screen.Scan.route) }
+                onNavigateToScan = { navController.navigate(Screen.Scan.route) },
             )
         }
 

@@ -41,7 +41,7 @@ class ScanReceiptUseCase @Inject constructor(
 }
 
 @kotlinx.serialization.Serializable
-internal data class ScannedIngredientDto(
+data class ScannedIngredientDto(
     val name: String,
     val quantity: Double = 1.0,
     val unit: String = "개",
