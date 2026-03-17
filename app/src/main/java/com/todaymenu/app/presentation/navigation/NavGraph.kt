@@ -39,7 +39,9 @@ fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
         composable(Screen.Home.route) {
             HomeScreen(
                 onNavigateToSettings = { navController.navigate(Screen.Settings.route) },
-                onNavigateToScan = { navController.navigate(Screen.Scan.route) }
+                onNavigateToScan = { navController.navigate(Screen.Scan.route) },
+                onNavigateToFridge = { navController.navigate(Screen.Fridge.route) },
+                onNavigateToRecommend = { navController.navigate(Screen.Recommend.route) }
             )
         }
 

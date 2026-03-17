@@ -110,6 +110,8 @@ dependencies {
 
     // WorkManager
     implementation(libs.workmanager)
+    implementation(libs.hilt.work)
+    ksp(libs.hilt.work.compiler)
 
     // Retrofit + OkHttp
     implementation(libs.retrofit)

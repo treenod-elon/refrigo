@@ -14,6 +14,7 @@ import com.todaymenu.app.presentation.common.components.BottomNavBar
 import com.todaymenu.app.presentation.navigation.NavGraph
 import com.todaymenu.app.presentation.navigation.Screen
 import com.todaymenu.app.presentation.theme.TodayMenuTheme
+import com.todaymenu.app.data.worker.ExpiryNotificationWorker
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,6 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        ExpiryNotificationWorker.schedule(this)
         setContent {
             TodayMenuTheme {
                 val navController = rememberNavController()
