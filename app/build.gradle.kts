@@ -7,6 +7,8 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics.plugin)
 }
 
 android {
@@ -133,6 +135,11 @@ dependencies {
 
     // ProfileInstaller
     implementation(libs.profileinstaller)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 
     // Core
     implementation(libs.core.ktx)

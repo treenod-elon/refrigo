@@ -27,3 +27,40 @@
 # OkHttp
 -dontwarn okhttp3.**
 -dontwarn okio.**
+
+# Hilt
+-keep class dagger.hilt.** { *; }
+-keep class javax.inject.** { *; }
+-keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$FragmentContextWrapper { *; }
+
+# Navigation Compose
+-keep class * extends androidx.navigation.Navigator
+
+# DataStore
+-keepclassmembers class * extends androidx.datastore.preferences.protobuf.GeneratedMessageLite {
+    <fields>;
+}
+
+# ML Kit
+-keep class com.google.mlkit.** { *; }
+-dontwarn com.google.mlkit.**
+
+# Coroutines
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+-keepclassmembers class kotlinx.coroutines.** { volatile <fields>; }
+
+# Compose
+-dontwarn androidx.compose.**
+-keep class androidx.compose.runtime.** { *; }
+
+# WorkManager
+-keep class * extends androidx.work.Worker
+-keep class * extends androidx.work.ListenableWorker
+-keep class androidx.work.WorkerParameters
+
+# Enum classes
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}

@@ -12,6 +12,7 @@ import androidx.compose.material.icons.rounded.Restaurant
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Screen(val route: String) {
+    data object Onboarding : Screen("onboarding")
     data object Home : Screen("home")
     data object Fridge : Screen("fridge")
     data object Recommend : Screen("recommend")

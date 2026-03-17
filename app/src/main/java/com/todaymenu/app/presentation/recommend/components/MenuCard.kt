@@ -104,7 +104,7 @@ fun MenuCard(
                         modifier = Modifier.weight(1f),
                         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 6.dp)
                     ) {
-                        Icon(Icons.Outlined.OndemandVideo, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Icon(Icons.Outlined.OndemandVideo, contentDescription = "유튜브", modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("유튜브", style = MaterialTheme.typography.labelMedium)
                     }
@@ -115,7 +115,7 @@ fun MenuCard(
                         modifier = Modifier.weight(1f),
                         contentPadding = PaddingValues(horizontal = 8.dp, vertical = 6.dp)
                     ) {
-                        Icon(Icons.Outlined.Article, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Icon(Icons.Outlined.Article, contentDescription = "블로그", modifier = Modifier.size(16.dp))
                         Spacer(modifier = Modifier.width(4.dp))
                         Text("블로그", style = MaterialTheme.typography.labelMedium)
                     }
@@ -127,7 +127,7 @@ fun MenuCard(
                 onClick = onShowRecipe,
                 modifier = Modifier.align(Alignment.End)
             ) {
-                Icon(Icons.Outlined.MenuBook, contentDescription = null, modifier = Modifier.size(18.dp))
+                Icon(Icons.Outlined.MenuBook, contentDescription = "AI 레시피", modifier = Modifier.size(18.dp))
                 Spacer(modifier = Modifier.width(4.dp))
                 Text("AI 레시피 보기")
             }

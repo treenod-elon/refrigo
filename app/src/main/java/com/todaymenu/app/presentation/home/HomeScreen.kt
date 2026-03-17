@@ -130,7 +130,7 @@ private fun ExpiryAlertCard(
         ) {
             Icon(
                 Icons.Outlined.Warning,
-                contentDescription = null,
+                contentDescription = "유통기한 임박 경고",
                 tint = MaterialTheme.colorScheme.error,
                 modifier = Modifier.size(32.dp)
             )
@@ -330,7 +330,7 @@ private fun TodayRecommendationSection(
                     ) {
                         Icon(
                             Icons.Outlined.Restaurant,
-                            contentDescription = null,
+                            contentDescription = "메뉴 추천",
                             modifier = Modifier.size(32.dp),
                             tint = MaterialTheme.colorScheme.onSurfaceVariant
                         )

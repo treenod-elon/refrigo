@@ -52,21 +52,21 @@ fun RecipeDetailSheet(
                     AssistChip(
                         onClick = {},
                         label = { Text(menu.cookingTime) },
-                        leadingIcon = { Icon(Icons.Outlined.Timer, contentDescription = null, modifier = Modifier.size(16.dp)) }
+                        leadingIcon = { Icon(Icons.Outlined.Timer, contentDescription = "조리시간", modifier = Modifier.size(16.dp)) }
                     )
                 }
                 if (menu.difficulty.isNotEmpty()) {
                     AssistChip(
                         onClick = {},
                         label = { Text(menu.difficulty) },
-                        leadingIcon = { Icon(Icons.Outlined.TrendingUp, contentDescription = null, modifier = Modifier.size(16.dp)) }
+                        leadingIcon = { Icon(Icons.Outlined.TrendingUp, contentDescription = "난이도", modifier = Modifier.size(16.dp)) }
                     )
                 }
                 if (menu.servings.isNotEmpty()) {
                     AssistChip(
                         onClick = {},
                         label = { Text(menu.servings) },
-                        leadingIcon = { Icon(Icons.Outlined.People, contentDescription = null, modifier = Modifier.size(16.dp)) }
+                        leadingIcon = { Icon(Icons.Outlined.People, contentDescription = "인분", modifier = Modifier.size(16.dp)) }
                     )
                 }
             }
@@ -159,7 +159,7 @@ fun RecipeDetailSheet(
                     ) {
                         Icon(
                             Icons.Outlined.Lightbulb,
-                            contentDescription = null,
+                            contentDescription = "팁",
                             modifier = Modifier.size(20.dp),
                             tint = MaterialTheme.colorScheme.tertiary
                         )
@@ -185,7 +185,7 @@ fun RecipeDetailSheet(
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Icon(Icons.Outlined.OndemandVideo, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Icon(Icons.Outlined.OndemandVideo, contentDescription = "유튜브", modifier = Modifier.size(18.dp))
                     Spacer(modifier = Modifier.width(8.dp))
                     Text("유튜브에서 레시피 보기")
                 }
@@ -201,7 +201,7 @@ fun RecipeDetailSheet(
                     },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Icon(Icons.Outlined.Article, contentDescription = null, modifier = Modifier.size(18.dp))
+                    Icon(Icons.Outlined.Article, contentDescription = "블로그", modifier = Modifier.size(18.dp))
                     Spacer(modifier = Modifier.width(8.dp))
                     Text("블로그에서 레시피 보기")
                 }
@@ -213,7 +213,7 @@ fun RecipeDetailSheet(
                 modifier = Modifier.fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
-                Icon(Icons.Outlined.DoneAll, contentDescription = null, modifier = Modifier.size(20.dp))
+                Icon(Icons.Outlined.DoneAll, contentDescription = "요리 완료", modifier = Modifier.size(20.dp))
                 Spacer(modifier = Modifier.width(8.dp))
                 Text("요리 완료 — 재료 차감")
             }

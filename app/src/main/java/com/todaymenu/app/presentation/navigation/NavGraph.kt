@@ -10,15 +10,20 @@ import androidx.navigation.compose.composable
 import com.todaymenu.app.presentation.fridge.FridgeScreen
 import com.todaymenu.app.presentation.home.HomeScreen
 import com.todaymenu.app.presentation.mealplan.MealPlanScreen
+import com.todaymenu.app.presentation.onboarding.OnboardingScreen
 import com.todaymenu.app.presentation.recommend.RecommendScreen
 import com.todaymenu.app.presentation.scan.ScanScreen
 import com.todaymenu.app.presentation.settings.SettingsScreen
 
 @Composable
-fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
+fun NavGraph(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+    startDestination: String = Screen.Home.route
+) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route,
+        startDestination = startDestination,
         modifier = modifier,
         enterTransition = {
             fadeIn(animationSpec = tween(300)) + slideInVertically(
@@ -36,6 +41,16 @@ fun NavGraph(navController: NavHostController, modifier: Modifier = Modifier) {
             fadeOut(animationSpec = tween(300))
         }
     ) {
+        composable(Screen.Onboarding.route) {
+            OnboardingScreen(
+                onComplete = {
+                    navController.navigate(Screen.Home.route) {
+                        popUpTo(Screen.Onboarding.route) { inclusive = true }
+                    }
+                }
+            )
+        }
+
         composable(Screen.Home.route) {
             HomeScreen(
                 onNavigateToSettings = { navController.navigate(Screen.Settings.route) },

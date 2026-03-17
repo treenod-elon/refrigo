@@ -158,7 +158,7 @@ fun IngredientCard(
                     imageVector = Icons.Outlined.Edit,
                     contentDescription = "${ingredient.name} 편집",
                     modifier = Modifier.size(20.dp),
-                    tint = Color(0xFF9E9E9E)
+                    tint = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
         }

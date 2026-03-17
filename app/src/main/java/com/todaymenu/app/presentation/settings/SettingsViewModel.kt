@@ -1,7 +1,9 @@
 package com.todaymenu.app.presentation.settings
 
+import android.net.Uri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.todaymenu.app.data.backup.BackupManager
 import com.todaymenu.app.data.local.datastore.UserPreferences
 import com.todaymenu.app.data.local.datastore.UserPreferencesData
 import com.todaymenu.app.data.remote.gemini.AiEngineRouter
@@ -16,13 +18,15 @@ import javax.inject.Inject
 data class SettingsUiState(
     val preferences: UserPreferencesData = UserPreferencesData(),
     val isNanoAvailable: Boolean = false,
-    val snackbarMessage: String? = null
+    val snackbarMessage: String? = null,
+    val backupFileName: String = ""
 )
 
 @HiltViewModel
 class SettingsViewModel @Inject constructor(
     private val userPreferences: UserPreferences,
-    private val aiRouter: AiEngineRouter
+    private val aiRouter: AiEngineRouter,
+    private val backupManager: BackupManager
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SettingsUiState())
@@ -66,6 +70,28 @@ class SettingsViewModel @Inject constructor(
 
     fun setFamilySize(size: Int) {
         viewModelScope.launch { userPreferences.updateFamilySize(size) }
+    }
+
+    fun getBackupFileName(): String = backupManager.getBackupFileName()
+
+    fun exportBackup(uri: Uri) {
+        viewModelScope.launch {
+            backupManager.exportToUri(uri).onSuccess {
+                _uiState.update { it.copy(snackbarMessage = "백업이 완료되었어요!") }
+            }.onFailure { e ->
+                _uiState.update { it.copy(snackbarMessage = "백업 실패: ${e.message}") }
+            }
+        }
+    }
+
+    fun importBackup(uri: Uri) {
+        viewModelScope.launch {
+            backupManager.importFromUri(uri).onSuccess {
+                _uiState.update { it.copy(snackbarMessage = "복원이 완료되었어요! 앱을 재시작해 주세요.") }
+            }.onFailure { e ->
+                _uiState.update { it.copy(snackbarMessage = "복원 실패: ${e.message}") }
+            }
+        }
     }
 
     fun clearSnackbar() {

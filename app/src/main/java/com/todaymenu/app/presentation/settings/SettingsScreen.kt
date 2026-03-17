@@ -1,5 +1,8 @@
 package com.todaymenu.app.presentation.settings
 
+import android.net.Uri
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -148,6 +151,76 @@ fun SettingsScreen(
                             )
                         }
                     }
+                }
+            }
+
+            HorizontalDivider(modifier = Modifier.padding(horizontal = 16.dp))
+
+            // 데이터 관리
+            SettingsSection(title = "데이터 관리") {
+                val exportLauncher = rememberLauncherForActivityResult(
+                    contract = ActivityResultContracts.CreateDocument("application/octet-stream")
+                ) { uri: Uri? ->
+                    uri?.let { viewModel.exportBackup(it) }
+                }
+
+                val importLauncher = rememberLauncherForActivityResult(
+                    contract = ActivityResultContracts.OpenDocument()
+                ) { uri: Uri? ->
+                    uri?.let { viewModel.importBackup(it) }
+                }
+
+                var showRestoreConfirm by remember { mutableStateOf(false) }
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
+                    OutlinedButton(
+                        onClick = { exportLauncher.launch(viewModel.getBackupFileName()) },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Icon(Icons.Outlined.Upload, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text("백업")
+                    }
+                    OutlinedButton(
+                        onClick = { showRestoreConfirm = true },
+                        modifier = Modifier.weight(1f)
+                    ) {
+                        Icon(Icons.Outlined.Download, contentDescription = null, modifier = Modifier.size(18.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text("복원")
+                    }
+                }
+                Text(
+                    "냉장고 재료, 식단, 장보기 목록 등 모든 데이터를 백업/복원합니다",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    modifier = Modifier.padding(horizontal = 16.dp)
+                )
+
+                if (showRestoreConfirm) {
+                    AlertDialog(
+                        onDismissRequest = { showRestoreConfirm = false },
+                        title = { Text("데이터 복원") },
+                        text = { Text("기존 데이터가 백업 데이터로 덮어씌워집니다. 계속하시겠어요?") },
+                        confirmButton = {
+                            TextButton(onClick = {
+                                showRestoreConfirm = false
+                                importLauncher.launch(arrayOf("application/octet-stream", "*/*"))
+                            }) {
+                                Text("복원하기")
+                            }
+                        },
+                        dismissButton = {
+                            TextButton(onClick = { showRestoreConfirm = false }) {
+                                Text("취소")
+                            }
+                        }
+                    )
                 }
             }
 
